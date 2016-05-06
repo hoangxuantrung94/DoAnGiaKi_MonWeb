@@ -1,92 +1,222 @@
 var phonecatApp = angular.module('App', []);
 
-phonecatApp.controller('TodoCtrl', function ($scope) {
-	$scope.hinhDaiDien = {'imageUrl': 'images/Trung.jpg'};
-	$scope.thongTinCaNhanh = {
-		'Ten': 'Hoàng Xuân Trung',
-		'CongViec': 'CEO at LinkedIn',
-		'diachi': 'Duc Linh - Binh Thuan',
-		'Secteur': 'Internet',
-		'Influenceur': 'Influenceur',
-		'Current': 'Actuel',
-		'CurrentAt': 'LinkedIn',
-		'Previous': 'Previous',
-		'PreviousAt': 'Malaria No More',
-		'EducationAndTraining': 'Education and training',
-		'EducationAndTrainingAt': 'universerty of science',
-		'Sdt': 'phone number',
-		'sdt': '01677 978 894',
-		'Suivre': 'Suivre',
-		'Vousconnaissez': 'Vous connaissez Trung?',
-		'SeConnecter': 'Se connecter',
-		'SeConnecterLink': '/people/invite?from=profile&amp;key=22330283&amp;firstName=Jeff&amp;lastName=Weiner&amp;authToken=XTo9&amp;authType=name&amp;connectionParam=member_desktop_profile_influencer&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=nprofile-flw_connect'
-	};
-	/*$scope.todos = [{ "txt":"learn angular"}];
-	$scope.todos = [{ "text":"learn angular", "done":true }];*/
+phonecatApp.controller('TodoCtrl', function ($scope,$http) {
+	$http.get('https://api.myjson.com/bins/386rc').success(function(data) {
+		//https://api.myjson.com/bins/3kt5o
+    $scope.hinhDaiDien = data.JhinhDaiDien;
+	$scope.thongTinCaNhanh = data.JthongTinCaNhanh;
+	$scope.parcours = data.Jparcours;
+	$scope.Summary = data.JSummary;
+	$scope.Experience = data.JExperience;
+	$scope.MemberDirectors1 = data.JMemberDirectors1;
+	$scope.MemberDirectors2 = data.JMemberDirectors2;
+	$scope.idBackgroundVolunteeringContainer = data.JidBackgroundVolunteeringContainer;
+	$scope.skills = data.Jskills;
+	$scope.education = data.Jeducation;
+	});
 	
-	$scope.parcours = {
-		'Parcours': 'Parcours'
-	};
-	$scope.Summary = {
-		'summary': 'summary',
-		'line1': 'Internet executive with over 20 years of experience, including general management of mid to large size organizations, corporate development, product development, business operations, and strategy.',
-		'line2': 'Currently CEO at LinkedIn, the web largest and most powerful network Of professionals...'
-	};
-	$scope.Experience = {
-		'experience': 'Experience',
-		'CEO': 'CEO',
-		'LinkedIn': 'LinkedIn',
-		'Datetime': 'décembre 2008',
-		'Date': '– Aujourd’hui (7 ans 5 mois)',
-		'ExperienceShowMore': 'Connecting the worlds professionals to make them more productive and successful. Since joining the company in December 2008, LinkedIn has expanded its global platform to 23 languages and more than 30 offices around the world, grown its membership base from 33M to more than 347M, and increased its revenue from $78M to over $2.2B in 2014.',
-		'mediaData1': 'LinkedIn"s Vision for the Next 10 Years',
-		'mediaData2': 'Bloomberg: LinkedIn Growth Has Reached "Critical Mass"',
-		'mediaData3': 'LinkedIn"s Culture Of Transformation',
-		'mediaData4': 'Building a Culture Of Compassion',
-		'mediaData5': 'Building a Culture Of CompassionNY TImes: Jeff Weiner of LinkedIn, on the "Next Play" Philosophy'
-	};
-	$scope.MemberDirectors1 = {
-		'a': 'Member, Board of Directors',
-		'span': 'Input',
-		'Datetime': 'avril 2012',
-		'Date': '– Aujourd’hui (4 ans 1 mois)',
-		'span_locality': 'Mountain View, CA',
-		'p': 'With revenue of $4B+ and approximately 8,000 employees, Intuit is a leading provider of innovative business and financial management solutions for small and medium-sized businesses, consumers, accounting professionals and financial institutions.',
-	};
-	$scope.MemberDirectors2 = {
-		'a': 'Member, Board of Directors',
-		'span': 'DonorsChoose',
-		'Datetime': '2007',
-		'Date': '– Aujourd’hui (9 ans)',
-		'span_locality': 'Mountain View, CA',
-		'p': 'One of the web"s leading philanthropic marketplaces, designed to enable teachers to upload classroom projects in need of funding, and for anyone to select and fund a project.',
-		'span21': '(en cours)',
-		'span22': '1 recommandation',
-		'h6': 'Founder, DonorsChoose.org',
-		'span3': 'Jeff Weiner is a mentor to me and a singularly effective champion of DonorsChoose.org. His “consumer product instinct” has shaped the user experience of our website. His introductions have generated more than $1 million in funding. And his...',
-		'a2': 'Voir'
-	};
-	$scope.idBackgroundVolunteeringContainer = {
-		'h3': 'Causes et expériences de bénévolat',
-		'h4': 'Des opportunités qui intéressent Jeff :',
-		'span': 'Comment aimeriez-vous faire don de votre temps et de votre talent ?',
-		'h42': 'Les causes qui importent à Jeff :',
-		'span2': 'Les sujets et les causes qui comptent pour vous.',
-		'li1': 'Autonomisation économique',
-		'li2': 'Formation',
-		'li3': 'Santé',
-		'h43': 'Les organismes auxquels Jeff apporte son soutien :',
-		'span3': 'Quels sont vos organismes préférés ?',
-		'li21': 'Boys Girls Clubs of the Peninsula',
-		'li22': 'DonorsChoose.org',
-		'li23': 'Malaria No More',
-		'li24': 'Venture For America'
-	};
-	$scope.skills = {
-		'h3': 'Compétences',
-		'h5': 'Top des compétences'
-	};
+	$scope.ten;
 	
+	$scope.FTen = function() {
+			var theElement = document.getElementById("fullname");
+			theElement.innerHTML = $scope.ten;
+			$scope.ten = null;
+		};
+		
+	$scope.congviec;
+	
+	$scope.FCongViec = function() {
+			var theElement = document.getElementById("CongViec");
+			theElement.innerHTML = $scope.congviec;
+			$scope.congviec = null;
+		};
+		
+	$scope.diachi;
+	
+	$scope.FDiaChi = function() {
+			var theElement = document.getElementById("locality");
+			theElement.innerHTML = $scope.diachi;
+			$scope.diachi = null;
+		};
+		
+	$scope.secteur;
+	
+	$scope.FSecteur = function() {
+			var theElement = document.getElementById("industry");
+			theElement.innerHTML = $scope.secteur;
+			$scope.secteur = null;
+		};
+		
+	$scope.currentAt;
+	
+	$scope.FCurrentAt = function() {
+			var theElement = document.getElementById("CurrentAt");
+			theElement.innerHTML = $scope.currentAt;
+			$scope.currentAt = null;
+		};
+		
+	$scope.previousAt;
+	
+	$scope.FPreviousAt = function() {
+			var theElement = document.getElementById("PreviousAt");
+			theElement.innerHTML = $scope.previousAt;
+			$scope.previousAt = null;
+		};
+		
+	$scope.educationAndTrainingAt;
+	
+	$scope.FEducationAndTrainingAt = function() {
+			var theElement = document.getElementById("EducationAndTrainingAt");
+			theElement.innerHTML = $scope.educationAndTrainingAt;
+			$scope.educationAndTrainingAt = null;
+		};
+		
+	$scope.sdt;
+	
+	$scope.Fsdt = function() {
+			var theElement = document.getElementById("sdt");
+			theElement.innerHTML = $scope.sdt;
+			$scope.sdt = null;
+		};
+		
+	$scope.parcours;
+	
+	$scope.FParcours = function() {
+			var theElement = document.getElementById("Parcours");
+			theElement.innerHTML =  "<h2>" + $scope.parcours + "</h2>";
+			$scope.parcours = null;
+		};
+		
+	$scope.summary;
+	
+	$scope.FSummary = function() {
+			var theElement = document.getElementById("Summary");
+			theElement.innerHTML =  "<h3>" + $scope.summary + "</h3>";
+			$scope.summary = null;
+		};
+		
+	$scope.summaryLine1;
+	$scope.summaryLine2;
+	$scope.FSummaryLine = function() {
+			var theElement = document.getElementById("SummaryLine");
+			if($scope.summaryLine1 == null)
+				$scope.summaryLine1 = $scope.Summary.line1;
+			if($scope.summaryLine2 == null)
+				$scope.summaryLine2 = $scope.Summary.line2;
+			theElement.innerHTML =  $scope.summaryLine1 + "<br>" + "<br>" + $scope.summaryLine2 + "<br>";
+			$scope.summaryLine1 = null;
+			$scope.summaryLine2 = null;
+		};
+		
+	$scope.experience;
+	$scope.FExperience = function() {
+			var theElement = document.getElementById("Experience");
+			theElement.innerHTML =  "<h3>" + $scope.experience + "</h3>";
+			$scope.experience = null;
+		};
+		
+	$scope.ceo;
+	$scope.FCeo = function() {
+			var theElement = document.getElementById("Ceo");
+			theElement.innerHTML =  $scope.ceo;
+			$scope.ceo = null;
+		};
+		
+	$scope.datetime;
+	$scope.date;
+	$scope.FDate = function() {
+			var theElement = document.getElementById("Date");
+			if($scope.datetime == null)
+				$scope.datetime = $scope.Experience.Datetime;
+			if($scope.date == null)
+				$scope.date = $scope.Experience.Date;
+			theElement.innerHTML =  "<time>" + $scope.datetime + "</time>" + " - " + $scope.date;
+			$scope.date = null;
+			$scope.datetime = null;
+		};
+		
+	$scope.experienceShowMore;
+	$scope.FExperienceShowMore = function() {
+			var theElement = document.getElementById("ExperienceShowMore");
+			theElement.innerHTML =  $scope.experienceShowMore;
+			$scope.experienceShowMore = null;
+		};
+		
+	$scope.a;
+	$scope.FA = function() {
+			var theElement = document.getElementById("A");
+			theElement.innerHTML =  $scope.a;
+			$scope.a = null;
+		};
+		
+	$scope.p;
+	$scope.FP = function() {
+			var theElement = document.getElementById("P");
+			theElement.innerHTML =  $scope.p;
+			$scope.p = null;
+		};
+	
+	$scope.a2;
+	$scope.FA2 = function() {
+			var theElement = document.getElementById("A2");
+			theElement.innerHTML =  $scope.a2;
+			$scope.a2 = null;
+		};
+		
+	$scope.p2;
+	$scope.FP2 = function() {
+			var theElement = document.getElementById("P2");
+			theElement.innerHTML =  $scope.p2;
+			$scope.p2 = null;
+		};
+		
+	$scope.h3;
+	$scope.FH3 = function() {
+			var theElement = document.getElementById("H3");
+			theElement.innerHTML =  $scope.h3;
+			$scope.h3 = null;
+		};
+		
+	$scope.skillsH3;
+	$scope.FSkillsH3 = function() {
+			var theElement = document.getElementById("SkillsH3");
+			theElement.innerHTML =  $scope.skillsH3;
+			$scope.skillsH3 = null;
+		};
+		
+	$scope.skillsH5;
+	$scope.FSkillsH5 = function() {
+			var theElement = document.getElementById("SkillsH5");
+			theElement.innerHTML =  $scope.skillsH5;
+			$scope.skillsH5 = null;
+		};
+		
+	$scope.educationA;
+	$scope.FEducationA = function() {
+			var theElement = document.getElementById("EducationA");
+			theElement.innerHTML =  $scope.educationA;
+			$scope.educationA = null;
+		};
+		
+	$scope.educationSpan;
+	$scope.FEducationSpan = function() {
+			var theElement = document.getElementById("EducationSpan");
+			theElement.innerHTML =  $scope.educationSpan;
+			$scope.educationSpan = null;
+		};
+		
+	$scope.educationDateFrom;
+	$scope.educationDateTo;
+	$scope.FEducationDate = function() {
+			var theElement = document.getElementById("EducationDate");
+			if($scope.educationDateFrom == null)
+				$scope.educationDateFrom = $scope.education.datetimefrom;
+			if($scope.educationDateTo == null)
+				$scope.educationDateTo = $scope.education.datetimeto;
+			theElement.innerHTML =  "<time>" + $scope.educationDateFrom + "</time>" + " - " + "<time>" + $scope.educationDateTo + "</time>";
+			$scope.educationDateFrom = null;
+			$scope.educationDateTo = null;
+		};
   
 });
 

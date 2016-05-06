@@ -8,6 +8,10 @@
 <script src="js/app.js"></script>
 <script type="text/javascript" src="js/angular.js"></script>
 <!-- // --> 
+<link href="./css/style.css" type="text/css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script src="https://static.licdn.com/scds/concat/common/js?h=ku3gvvjjzic1ryegfpi1mewv-4wdpqopdkf1bl2nf88hfmaebu-6uv5nuq89qf7u11t4l1xvqgke-8i4bmt5uykmc1vfu3vh4csbda-9m1quxf5dekbqb8gx7gncjs7g-8tbgxv4vaf70pv0j856sjy11s-dpxoi1dpo162kowi4n2zq8fxl-csxv1012y2i4xsg7zwzxm14qc-6i46bqsx4jqz6e26n5w9ri1mv-8qhth2w5vri6s12qal0f38gjt-5j2aer0lxg14u8fmc74q9yk78&amp;fc=2"></script>
 <script src="https://static.licdn.com:443/scds/common/u/lib/fizzy/fz-1.3.8-min.js" type="text/javascript"></script><style></style><script type="text/javascript">fs.config({"failureRedirect":"https://www.linkedin.com/nhome/","uniEscape":true,"xhrHeaders":{"X-FS-Origin-Request":"/in/jeffweiner08","X-FS-Page-Id":"nprofile-public-vanity"}});</script><script></script>
 <meta name="globalTrackingUrl" content="//www.linkedin.com/mob/tracking">
@@ -125,7 +129,7 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 <!-- picture -->
 <div class="profile-picture"> 
 <a href="javascript:void(0)" id="control_gen_3">
-<img ng-src="{{hinhDaiDien.imageUrl}}" width="240" height="240" alt="">
+<img ng-src="{{hinhDaiDien}}" width="240" height="240" alt="">
 <span class="larger-profile-photo-control"></span>
 </a>
 
@@ -158,12 +162,28 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  
  <div data-li-template="p2_basic_info">
  <div id="name-container" data-li-template="name">
- <div id="name" class="editable-item"><h1><span class="fn"><span class="full-name" dir="auto">{{thongTinCaNhanh.Ten}}</span></span></h1>
+ <div id="name" class="editable-item"><h1><span class="fn"><span id="fullname" dir="auto">{{thongTinCaNhanh.Ten}} </span> <a href="#DialogTen">Edit</a></h1>
+ 
+ <div id="DialogTen" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="ten"/>
+		<button type="button" class="btn btn-primary" ng-click="FTen()">Save changes</button>
+	</div>
+</div>
+ 
  </div>
  </div>
  
  <div id="headline-container" data-li-template="headline">
- <div id="headline" class="editable-item"><p class="title" dir="ltr">{{thongTinCaNhanh.CongViec}}</p></div>
+ <div id="headline" class="editable-item"><p id="CongViec" dir="ltr">{{thongTinCaNhanh.CongViec}}</p><a href="#DialogCongViec">Edit</a></div>
+ <div id="DialogCongViec" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="congviec"/>
+		<button type="button" class="btn btn-primary" ng-click="FCongViec()">Save changes</button>
+	</div>
+</div>
  </div>
  
  <div class="demographic-info adr editable-item" id="demographics">
@@ -174,18 +194,34 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  
  <dt>Lieu</dt>
  <dd>
- <span class="locality">
- <a href="/vsearch/p?f_G=us%3A84&amp;trk=prof-0-ovw-location" name="location" title="Trouver d’autres utilisateurs à Région de la baie de San Francisco , États-Unis">
+ <span id="locality">
+ <a href="#" name="location" title="Trouver d’autres utilisateurs à Région de la baie de San Francisco , États-Unis">
  {{thongTinCaNhanh.diachi}}</a>
  </span>
+ <a href="#DialogDiaChi">(Edit)</a>
  </dd>
- 
+ <div id="DialogDiaChi" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="diachi"/>
+		<button type="button" class="btn btn-primary" ng-click="FDiaChi()">Save changes</button>
+	</div>
+</div>
  <dt>Secteur</dt>
  <dd class="industry">
+ <span id="industry">
  <a href="/vsearch/p?f_I=6&amp;trk=prof-0-ovw-industry" name="industry" title="Trouver d’autres utilisateurs travaillant dans ce secteur">{{thongTinCaNhanh.Secteur}}
  </a>
+ </span>
  </dd>
- 
+ <a href="#DialogSecteur">(Edit)</a>
+ <div id="DialogSecteur" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="secteur"/>
+		<button type="button" class="btn btn-primary" ng-click="FSecteur()">Save changes</button>
+	</div>
+</div>
  </dl>
  
  </div>
@@ -211,9 +247,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  <td>
  <ol>
  <li>
- <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/1337?pathWildcard=1337" data-li-url="/biz/miniprofile/1337?pathWildcard=1337" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2" data-li-miniprofile-id="LI-8185267">
+ <span data-tracking="mcp_profile_sum" id="CurrentAt" class="new-miniprofile-container /biz/miniprofile/1337?pathWildcard=1337" data-li-url="/biz/miniprofile/1337?pathWildcard=1337" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2" data-li-miniprofile-id="LI-8185267">
  <strong><a href="/company/1337?trk=prof-0-ovw-curr_pos" dir="auto">{{thongTinCaNhanh.CurrentAt}}</a></strong>
  </span>
+ <a href="#DialogCurrentAt">(Edit)</a>
+ <div id="DialogCurrentAt" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="currentAt"/>
+		<button type="button" class="btn btn-primary" ng-click="FCurrentAt()">Save changes</button>
+	</div>
+</div>
  </li>
  <!--li>
  <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/1666?pathWildcard=1666" data-li-url="/biz/miniprofile/1666?pathWildcard=1666" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2">
@@ -244,9 +288,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  <td>
  <ol>
  <li>
- <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/695380?pathWildcard=695380" data-li-url="/biz/miniprofile/695380?pathWildcard=695380" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2" data-li-miniprofile-id="LI-9995356">
+ <span data-tracking="mcp_profile_sum" id="PreviousAt" class="new-miniprofile-container /biz/miniprofile/695380?pathWildcard=695380" data-li-url="/biz/miniprofile/695380?pathWildcard=695380" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2" data-li-miniprofile-id="LI-9995356">
  <strong><a href="/company/695380?trk=prof-0-ovw-prev_pos" dir="auto">{{thongTinCaNhanh.PreviousAt}}</a></strong>
- </span>, 
+ </span>
+ <a href="#DialogPreviousAt">(Edit)</a>
+ <div id="DialogPreviousAt" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="previousAt"/>
+		<button type="button" class="btn btn-primary" ng-click="FPreviousAt()">Save changes</button>
+	</div>
+</div>
  </li>
  <!--li>
  <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/17412?pathWildcard=17412" data-li-url="/biz/miniprofile/17412?pathWildcard=17412" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2" data-li-miniprofile-id="LI-182153">
@@ -282,7 +334,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  
  <ol>
  <li>
+ <span id="EducationAndTrainingAt">
  <a href="/edu/school?id=19329&amp;trk=prof-0-ovw-edu" title="Plus de détails pour cette école">{{thongTinCaNhanh.EducationAndTrainingAt}}</a>
+ </span>
+ <a href="#DialogEducationAndTrainingAt">(Edit)</a>
+ <div id="DialogEducationAndTrainingAt" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="educationAndTrainingAt"/>
+		<button type="button" class="btn btn-primary" ng-click="FEducationAndTrainingAt()">Save changes</button>
+	</div>
+</div>
  </li>
  </ol>
  
@@ -299,7 +361,15 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
  <div class="profile-aux">
  
  <div class="member-connections follower-count">
- <strong>{{thongTinCaNhanh.sdt}}</strong>{{thongTinCaNhanh.Sdt}}
+ <strong><span id="sdt">{{thongTinCaNhanh.sdt}}</span></strong>{{thongTinCaNhanh.Sdt}}
+ <a href="#Dialogsdt">(Edit)</a>
+ <div id="Dialogsdt" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="sdt"/>
+		<button type="button" class="btn btn-primary" ng-click="Fsdt()">Save changes</button>
+	</div>
+</div>
  </div>
  
  <div class="profile-actions view-actions outside-dropdown">
@@ -529,22 +599,47 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 <script type="text/javascript">fs._server.fire("profile-decision-board",{event:"after",type:"html"});</script>
 <script type="text/javascript">fs._server.fire("profile_v2_background",{event:"before",type:"html"});</script>
 <div id="background" class="profile-background">
-<h2>{{parcours.Parcours}}</h2>
+<span id="Parcours"><h2>{{parcours.Parcours}}</h2></span>
+<a href="#DialogParcours">(Edit)</a>
+ <div id="DialogParcours" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="parcours"/>
+		<button type="button" class="btn btn-primary" ng-click="FParcours()">Save changes</button>
+	</div>
+</div>
 <div class="background-content ">
 <div id="background-summary-container" class="background-section " data-li-template="summary_section">
 <div id="background-summary" class="background-summary edit-default">
 <div class="summary-header">
-<h3>{{Summary.summary}}</h3>
+<span id="Summary"><h3>{{Summary.summary}}</h3></span>
+<a href="#DialogSummary">(Edit)</a>
+ <div id="DialogSummary" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="summary"/>
+		<button type="button" class="btn btn-primary" ng-click="FSummary()">Save changes</button>
+	</div>
+</div>
 </div>
 
 <div id="summary-item" class="editable-item section-item">
 <div id="summary-item-view">
 <div class="summary">
 
-<p class="description" dir="ltr" >{{Summary.line1}}<br>
+<p id="SummaryLine" class="description" dir="ltr" >{{Summary.line1}}<br>
 <br>
 {{Summary.line2}}<br>
 </p>
+<a href="#DialogSummaryLine">(Edit)</a>
+ <div id="DialogSummaryLine" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="summaryLine1"/>
+		<input id="nb2" type="text" name="number2" ng-model="summaryLine2"/>
+		<button type="button" class="btn btn-primary" ng-click="FSummaryLine()">Save changes</button>
+	</div>
+</div>
 
 </div>
 </div>
@@ -554,7 +649,18 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 
 <div id="background-experience-container" class="background-section" data-li-template="experience_section">
 <div id="background-experience" class="background-experience edit-default">
-<h3>{{Experience.experience}}</h3>
+<div class="summary-header">
+<span id="Experience"><h3>{{Experience.experience}}</h3></span>
+<!--a href="#DialogExperience">(Edit)</a>
+ <div id="DialogExperience" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="experience"/>
+		<button type="button" class="btn btn-primary" ng-click="FExperience()">Save changes</button>
+	</div>
+</div-->
+</div>
+
 <div id="experience-58506340" class="editable-item section-item current-position">
 <div id="experience-58506340-view">
 <header>
@@ -568,18 +674,45 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 </a>
 </h5>
 <h4>
-<a href="https://www.linkedin.com/title/ceo?trk=mprofile_title" title="En savoir plus sur ce titre">{{Experience.CEO}}</a>
+<span id="Ceo"><a href="#" title="En savoir plus sur ce titre">{{Experience.CEO}}</a></span>
 </h4>
+<a href="#DialogCeo">(Edit)</a>
+ <div id="DialogCeo" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2" ng-model="ceo"/>
+		<button type="button" class="btn btn-primary" ng-click="FCeo()">Save changes</button>
+	</div>
+</div>
 <h5>
 <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/1337?pathWildcard=1337" data-li-url="/biz/miniprofile/1337?pathWildcard=1337" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2">
-<strong><a href="/company/1337?trk=prof-exp-company-name" dir="auto">{{Experience.LinkedIn}}</a></strong>
+<strong><a href="#" dir="auto">{{Experience.LinkedIn}}</a></strong>
 </span>
 </h5>
 </header>
-<span class="experience-date-locale">
+<span id="Date" class="experience-date-locale">
 <time>{{Experience.Datetime}}</time> {{Experience.Date}}
 </span>
-<p class="description summary-field-show-more" dir="ltr">{{Experience.ExperienceShowMore}}</p>
+<a href="#DialogDate">(Edit)</a>
+ <div id="DialogDate" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="datetime"/>
+		<input id="nb2" type="text" name="number2"  ng-model="date"/>
+		<button type="button" class="btn btn-primary" ng-click="FDate()">Save changes</button>
+	</div>
+</div>
+
+<p id="ExperienceShowMore" class="description summary-field-show-more" dir="ltr">{{Experience.ExperienceShowMore}}</p>
+<a href="#DialogExperienceShowMore">(Edit)</a>
+ <div id="DialogExperienceShowMore" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="experienceShowMore"/>
+		<button type="button" class="btn btn-primary" ng-click="FExperienceShowMore()">Save changes</button>
+	</div>
+</div>
+
 <dl class="education-associated"></dl>
 </div>
 
@@ -734,8 +867,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 </a>
 </h5>
 <h4>
-<a href="https://www.linkedin.com/title/member%2C-board-of-directors?trk=mprofile_title" title="En savoir plus sur ce titre">{{MemberDirectors1.a}}</a>
+<span id="A"><a href="#" title="En savoir plus sur ce titre">{{MemberDirectors1.a}}</a></span>
 </h4>
+<a href="#DialogA">(Edit)</a>
+ <div id="DialogA" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="a"/>
+		<button type="button" class="btn btn-primary" ng-click="FA()">Save changes</button>
+	</div>
+</div>
+
 <h5>
 <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/1666?pathWildcard=1666" data-li-url="/biz/miniprofile/1666?pathWildcard=1666" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2">
 <strong><a href="/company/1666?trk=prof-exp-company-name" dir="auto">{{MemberDirectors1.span}}</a></strong>
@@ -746,9 +888,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 <span class="experience-date-locale"><time>{{MemberDirectors1.Datetime}}</time> {{MemberDirectors1.Date}}
 <span class="locality">{{MemberDirectors1.span_locality}}</span>
 </span>
-<p class="description summary-field-show-more" dir="ltr">
+<p id = "P"class="description summary-field-show-more" dir="ltr">
 {{MemberDirectors1.p}}
 </p>
+<a href="#DialogP">(Edit)</a>
+ <div id="DialogP" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="p"/>
+		<button type="button" class="btn btn-primary" ng-click="FP()">Save changes</button>
+	</div>
+</div>
 </div>
 
 </div>
@@ -767,8 +917,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 </a>
 </h5>
 <h4>
-<a href="https://www.linkedin.com/title/member%2C-board-of-directors?trk=mprofile_title" title="En savoir plus sur ce titre">{{MemberDirectors2.a}}</a>
+<span id="A2"><a href="https://www.linkedin.com/title/member%2C-board-of-directors?trk=mprofile_title" title="En savoir plus sur ce titre">{{MemberDirectors2.a}}</a><span>
 </h4>
+<a href="#DialogA2">(Edit)</a>
+ <div id="DialogA2" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="a2"/>
+		<button type="button" class="btn btn-primary" ng-click="FA2()">Save changes</button>
+	</div>
+</div>
+
 <h5>
 <span data-tracking="mcp_profile_sum" class="new-miniprofile-container /biz/miniprofile/33101?pathWildcard=33101" data-li-url="/biz/miniprofile/33101?pathWildcard=33101" data-li-getjs="https://static.licdn.com/scds/concat/common/js?h=40vfeoewuurexnhvi1o2qiknu&amp;fc=2">
 <strong>
@@ -778,8 +937,17 @@ if(!LI.IntrosDialogDependencies){LI.IntrosDialogDependencies={jsFiles:'https:\/\
 </h5>
 </header>
 <span class="experience-date-locale"><time>{{MemberDirectors2.Datetime}}</time> {{MemberDirectors2.Date}}</span>
-<p class="description summary-field-show-more" dir="ltr">{{MemberDirectors2.p}}
+<p id="P2" class="description summary-field-show-more" dir="ltr">{{MemberDirectors2.p}}
 </p>
+<a href="#DialogP2">(Edit)</a>
+ <div id="DialogP2" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="p2"/>
+		<button type="button" class="btn btn-primary" ng-click="FP2()">Save changes</button>
+	</div>
+</div>
+
 <dl class="education-associated">
 <dt data-trk-code="prof-exp-snippet-endorsement-close" data-trk-code-alt="prof-exp-snippet-endorsement-open">
 <span>{{MemberDirectors2.span21}}</span>{{MemberDirectors2.span22}}
@@ -1139,7 +1307,16 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  
  <div id="background-volunteering-container" class="background-section" data-li-template="volunteering_section">
  <div id="background-volunteering" class="background-volunteering">
- <h3>{{idBackgroundVolunteeringContainer.h3}}</h3>
+ <span id="H3"> <h3>{{idBackgroundVolunteeringContainer.h3}}</h3> </span>
+ <a href="#DialogH3">(Edit)</a>
+ <div id="DialogH3" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="h3"/>
+		<button type="button" class="btn btn-primary" ng-click="FH3()">Save changes</button>
+	</div>
+</div>
+
  <script>if(LI.Dialog){LI.Dialog().submitEvent.subscribe(function(type,args){var volexpID;if(args[1]=='removeVolunteeringExperienceDialog'&&WebTracking&&WebTracking.trackUserAction){if(args[2]&&args[2].volexpID){volexpID=args[2].volexpID;}WebTracking.trackUserAction('profile-edit-vol_exp-remove-submit',{volexpID:volexpID});}});}
  </script>
  <div id="volunteering-opportunities" class="editable-item no-content">
@@ -1196,14 +1373,31 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <div id="background-skills-container" class="background-section" data-li-template="skills_section">
  <div id="background-skills" class="background-skills edit-default">
  <div class="hd">
- <h3>{{skills.h3}}</h3>
+ <h3 id="SkillsH3">{{skills.h3}}</h3>
+  <a href="#DialogSkillsH3">(Edit)</a>
+ <div id="DialogSkillsH3" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="skillsH3"/>
+		<button type="button" class="btn btn-primary" ng-click="FSkillsH3()">Save changes</button>
+	</div>
+</div>
  </div>
  <div id="skills-error-alert">
  </div>
  <div id="skills-item" class="editable-item">
  <div id="skills-item-view">
  <div id="profile-skills">
- <h5>{{skills.h5}}</h5>
+ <h5 id="SkillsH5">{{skills.h5}}</h5>
+ <a href="#DialogSkillsH5">(Edit)</a>
+ <div id="DialogSkillsH5" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="skillsH5"/>
+		<button type="button" class="btn btn-primary" ng-click="FSkillsH5()">Save changes</button>
+	</div>
+</div>
+
  <ul class="skills-section">
  <li data-endorsed-item-name="Business Strategy" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1214,84 +1408,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Business Strategy</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAbqAAAAJDlmNmEyYmUzLTdiYTUtNGQ3MC04N2NlLWQyZGFmODcwZTc3NQ.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PqnIYvG4WgnOYAX8BSSBF_" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PqnIYvG4WgnOYAX8BSSBF_" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/085/09b/1fbae54.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OY0Iium612o2pZ-PpkCAd5" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OY0Iium612o2pZ-PpkCAd5" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAVrAAAAJDE5Y2QxNDAzLTJmNDctNDNiZC04ODVlLTlhNTNiMjc2Y2JlNQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutkVxs4Y8D9uFyjtoO4Dfkg" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutkVxs4Y8D9uFyjtoO4Dfkg" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAJzAAAAJDI0MTU4N2Q0LWRhYzktNDZhNC1hMTBjLTQyYjhjNzhlYjNkNg.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAKNAAAAJGQ4YzhkNWI5LWY2YzQtNGUxMy1hOTczLTRkYWMxMWZiYmVhMw.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuskvMia4923q_3WaZy6PLvp" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuskvMia4923q_3WaZy6PLvp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/005/038/373/205c0fd.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAiaAAAAJDUzOGY2YmFjLTJmMDktNDExMS05ZDhiLWFjN2I0OGJiZmE2YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PHZDP7kw7LAHvzRgui7jLe" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PHZDP7kw7LAHvzRgui7jLe" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/0a6/2f0/300553e.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvaXNJPAqBmyFhJisELL_X4" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvaXNJPAqBmyFhJisELL_X4" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
+ 
  </li>
  
  <li data-endorsed-item-name="Leadership" class="endorse-item has-endorsements " data-endorsement-id="">
@@ -1304,97 +1421,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  </span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_7brQPm7fPOCXyk8DUW_vk" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_7brQPm7fPOCXyk8DUW_vk" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/005/080/3cc/2b262b7.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvaXNJPAqBmyFhJisELL_X4" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvaXNJPAqBmyFhJisELL_X4" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAbqAAAAJDlmNmEyYmUzLTdiYTUtNGQ3MC04N2NlLWQyZGFmODcwZTc3NQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PyL13VHpGaE4Erryt4l1oD" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PyL13VHpGaE4Erryt4l1oD" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAQCAAAAJDBmYmM1ZWNiLTFlNmEtNGVhZC04NDEyLTljOWU1ZDgzZDViYw.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/0a6/05d/34f5582.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutG0F34V8tnx_nlb-M8UymO" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutG0F34V8tnx_nlb-M8UymO" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3rPWQ9nsOH2moYYjI0Q3uuH" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3rPWQ9nsOH2moYYjI0Q3uuH" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/2/000/0bc/031/2cf0829.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3p-MpUToG3YZ1w31rVUchuG" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3p-MpUToG3YZ1w31rVUchuG" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYUbM22-oLVRXa_jAs70sat" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYUbM22-oLVRXa_jAs70sat" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/005/071/26e/0698dbf.jpg">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line">
- </div>
- </div>
+ 
  </li>
  <li data-endorsed-item-name="Strategy" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1406,97 +1433,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Strategy</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/000/05e/193/01460bf.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAbqAAAAJDlmNmEyYmUzLTdiYTUtNGQ3MC04N2NlLWQyZGFmODcwZTc3NQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NGPs4e-aZkKvz7IsQUC7vt" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PqnIYvG4WgnOYAX8BSSBF_" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PqnIYvG4WgnOYAX8BSSBF_" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/085/09b/1fbae54.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAT1AAAAJDMzMGM2OGQ0LTI3N2MtNGMxMi04ZDE3LTllM2IyYzI4YTIyOQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAKNAAAAJGQ4YzhkNWI5LWY2YzQtNGUxMy1hOTczLTRkYWMxMWZiYmVhMw.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/005/08e/09d/30c0d32.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAiaAAAAJDUzOGY2YmFjLTJmMDktNDExMS05ZDhiLWFjN2I0OGJiZmE2YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx3548m6_T_W-Ksc7OLifBooF" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx3548m6_T_W-Ksc7OLifBooF" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuts5CMR84p0i9YbsoyuTlhq" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuts5CMR84p0i9YbsoyuTlhq" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAXFAAAAJDA2OWM3N2VkLWIzZTEtNGZmYy1hNDMzLTBjNjM2ZjFjMmI3NA.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
+ 
  </li>
  <li data-endorsed-item-name="Entrepreneurship" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1507,101 +1444,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Entrepreneurship</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/000/05e/193/01460bf.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAbqAAAAJDlmNmEyYmUzLTdiYTUtNGQ3MC04N2NlLWQyZGFmODcwZTc3NQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAT1AAAAJDMzMGM2OGQ0LTI3N2MtNGMxMi04ZDE3LTllM2IyYzI4YTIyOQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAR8AAAAJDEyNTM3MmM2LWVkYTEtNDk5OS1hY2E5LWRiNmYyODVlMzJhZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAKNAAAAJGQ4YzhkNWI5LWY2YzQtNGUxMy1hOTczLTRkYWMxMWZiYmVhMw.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAiaAAAAJDUzOGY2YmFjLTJmMDktNDExMS05ZDhiLWFjN2I0OGJiZmE2YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OIFyJpg1fyBQhnMgDaJGEP" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OIFyJpg1fyBQhnMgDaJGEP" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvCtfLFJWhuGa1wjGlycJdi" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvCtfLFJWhuGa1wjGlycJdi" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/000/1dd/108/16abb68.jpg">
  
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAIwAAAAJDIzZDI0NzUxLWMyMDYtNGMwYi1iMGJmLTJiNjUyMWNjN2VjMA.jpg">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
  </li>
  <li data-endorsed-item-name="Product Marketing" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1612,98 +1455,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Product Marketing</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusQPDau7sQi_JNHZqVoeOdC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusQPDau7sQi_JNHZqVoeOdC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAO1AAAAJDZlYWY5ZjFlLWQwODYtNDExNi04ZWRkLTZjYzg4ZTRmYmVjZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAR8AAAAJDEyNTM3MmM2LWVkYTEtNDk5OS1hY2E5LWRiNmYyODVlMzJhZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OMzJAwSaliBZ2pWRZObvbf" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OMzJAwSaliBZ2pWRZObvbf" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3pUQLPBrf-LhOthxDR68X1Z" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3pUQLPBrf-LhOthxDR68X1Z" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/8/005/0b2/308/0144ee7.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAIwAAAAJDIzZDI0NzUxLWMyMDYtNGMwYi1iMGJmLTJiNjUyMWNjN2VjMA.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/084/375/184bebc.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NsG5yLbyKHg8a0t4cjr73f" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NsG5yLbyKHg8a0t4cjr73f" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/000/2a1/138/3cf12fd.jpg">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
+ 
  </li>
  <li data-endorsed-item-name="Strategic Planning" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1714,95 +1466,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Strategic Planning</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAT1AAAAJDMzMGM2OGQ0LTI3N2MtNGMxMi04ZDE3LTllM2IyYzI4YTIyOQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/0a6/05d/34f5582.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusQPDau7sQi_JNHZqVoeOdC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusQPDau7sQi_JNHZqVoeOdC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAO1AAAAJDZlYWY5ZjFlLWQwODYtNDExNi04ZWRkLTZjYzg4ZTRmYmVjZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAR8AAAAJDEyNTM3MmM2LWVkYTEtNDk5OS1hY2E5LWRiNmYyODVlMzJhZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYq-Jf_hCe59fI2ds20ncu5" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYq-Jf_hCe59fI2ds20ncu5" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/000/294/0b8/0cec37d.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAMxAAAAJGY3N2VjMzY5LWIyNjUtNDZmMy1hMWE1LTI5MGE1NWRiOTU1YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/6/005/038/35b/00a11f6.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutM4DhX4pisTiSyaXabnt5d" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutM4DhX4pisTiSyaXabnt5d" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/005/08e/09d/30c0d32.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutcKzajQBnEXuqWJ7SC7VLC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAiaAAAAJDUzOGY2YmFjLTJmMDktNDExMS05ZDhiLWFjN2I0OGJiZmE2YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg">
- </strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
+ 
  </li>
  <li data-endorsed-item-name="Executive Management" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1813,91 +1477,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Executive Management</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_W9MqcT9_tm7hi80Pn0ZUF" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/000/05e/193/01460bf.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/0a6/05d/34f5582.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NPJWOfd57FXtYCSmIzPZdU" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAR8AAAAJDEyNTM3MmM2LWVkYTEtNDk5OS1hY2E5LWRiNmYyODVlMzJhZQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAMxAAAAJGY3N2VjMzY5LWIyNjUtNDZmMy1hMWE1LTI5MGE1NWRiOTU1YQ.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/6/005/038/35b/00a11f6.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_rQJ1V5kYm8JkmG6NN6cjp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/005/08e/09d/30c0d32.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OfEANn5eAfChWw1WBeFhJ7" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OfEANn5eAfChWw1WBeFhJ7" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAkFAAAAJGUyZjU4YzM3LTdkZWYtNDEyYi04ZTJlLWFhYjJjOTM4Zjk3Zg.jpg">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png">
- </strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAIwAAAAJDIzZDI0NzUxLWMyMDYtNGMwYi1iMGJmLTJiNjUyMWNjN2VjMA.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB-OAajgLitsDyR7PzkTAko8" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB-OAajgLitsDyR7PzkTAko8" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/5/000/2a5/36c/1716466.jpg"></strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line"></div>
- </div>
+ 
  </li>
  <li data-endorsed-item-name="Product Development" class="endorse-item has-endorsements " data-endorsement-id="">
  <span class="skill-pill">
@@ -1908,82 +1488,15 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <span class="endorse-item-name-text">Product Development</span>
  </span>
  </span>
- <div class="endorsers-container">
- <ul class="endorsers-pics">
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuseb_eIeUHsdjxlREGcvSVp" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAT1AAAAJDMzMGM2OGQ0LTI3N2MtNGMxMi04ZDE3LTllM2IyYzI4YTIyOQ.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvr2V12gOqPg5HFCneFglY-" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/000/0a6/05d/34f5582.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/6/005/038/35b/00a11f6.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36hpHpUCCZmTF9QOdCbIVzv" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAKNAAAAJGQ4YzhkNWI5LWY2YzQtNGUxMy1hOTczLTRkYWMxMWZiYmVhMw.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8PQc-9WgZsXdauOcHqb207F" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAMxAAAAJGY3N2VjMzY5LWIyNjUtNDZmMy1hMWE1LTI5MGE1NWRiOTU1YQ.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAIwAAAAJDIzZDI0NzUxLWMyMDYtNGMwYi1iMGJmLTJiNjUyMWNjN2VjMA.jpg"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvLCGG3iJhO5lVPgr_PI6_Z" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong>
- </span>
- </li>
- <li>
- <span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvWmS1_a90yTqfayaBlGLjt" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvWmS1_a90yTqfayaBlGLjt" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAOfAAAAJDYyMDg3NGQ4LTNiMjgtNDZiOC1hYmI1LTgwM2YwZTkyZTg2Zg.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OT_q2R8JX0LXtUwXPJUTt5" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OT_q2R8JX0LXtUwXPJUTt5" data-li-tl="tl/shared/profile/mini_profile_shell">
- <strong>
- <img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/2/005/04e/176/394086b.jpg"></strong>
- </span>
- </li>
- <li class="endorsers-action">
- <a class="see-all-endorsers" href="javascript:void(0)" role="button">
- <span class="loader"></span>
- </a>
- </li>
- </ul>
- <div class="hr-line">
- </div
  
- </div>
  </li>
  <li data-endorsed-item-name="Product Management" class="endorse-item has-endorsements " data-endorsement-id="">
- <span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="76">76</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Product Management</span></span></span><div class="endorsers-container"><ul class="endorsers-pics"><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-url="/profile/mini-profile-with-connections?_ed=0_TEB3X1-dTo-PioxE7m5Oof8dSlw5HxyqTPu7iXvYx36YZ10bUfvjhgl4ZBxn62dV" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/185/30d/12b15a4.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_C3kqIMQT7dKOYCXt6qY9q" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAbqAAAAJDlmNmEyYmUzLTdiYTUtNGQ3MC04N2NlLWQyZGFmODcwZTc3NQ.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusXbFostj-b2JetRAeovXxX" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusXbFostj-b2JetRAeovXxX" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/084/375/184bebc.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB_GrnH69d-Ze4EgfQEA550i" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusPeQF4nabeVxX-Y-yYghmC" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/6/005/038/35b/00a11f6.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OMzJAwSaliBZ2pWRZObvbf" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8OMzJAwSaliBZ2pWRZObvbf" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB-oo-qdfUBsmZoTXInXnFVh" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViB-oo-qdfUBsmZoTXInXnFVh" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/005/066/390/2367ca9.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8N2vZV7_JkSNVrXnMDEkvEQ" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAIwAAAAJDIzZDI0NzUxLWMyMDYtNGMwYi1iMGJmLTJiNjUyMWNjN2VjMA.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBZ5D4eosZ1DK273eW5TJDey" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBZ5D4eosZ1DK273eW5TJDey" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusr0FJksPoyQ9xsJImLzc0r" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTusr0FJksPoyQ9xsJImLzc0r" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAASDAAAAJDAyMDQ0MWE4LWI0MjUtNDBmNy1hMjM0LTNmNTM0ZTM1YTM2Zg.jpg"></strong></span></li><li class="endorsers-action"><a class="see-all-endorsers" href="javascript:void(0)" role="button"><span class="loader"></span></a></li></ul><div class="hr-line"></div></div></li><li data-endorsed-item-name="LinkedIn" class="endorse-item has-endorsements " data-endorsement-id=""><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="73">73</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">LinkedIn</span></span></span><div class="endorsers-container"><ul class="endorsers-pics"><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBZDHbk2gAYyAhdmEVGRPbFg" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBZDHbk2gAYyAhdmEVGRPbFg" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAVBAAAAJGUwN2Q5YWMzLTI3YTgtNGIyYy1hNTc1LTY2MDJmMDRlYWEwMA.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuv8GRI9fhxdF0HKK88iLZrL" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/12d/06a/00ee542.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-url="/profile/mini-profile-with-connections?_ed=0_VQV8-V-t3JKW-l5j694yj6CdSDRuElcInmzcIf1LN3plqKKgYgAV-KXxdkIUUF3i" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://static.licdn.com/scds/common/u/images/themes/katy/ghosts/person/ghost_person_30x30_v1.png"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MsQZiwSqHkOf7R0KNJZVzo" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/084/375/184bebc.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MId1w51J0Z38z7l5LTwegs" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8MId1w51J0Z38z7l5LTwegs" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/005/04b/347/3b02f68.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvWmS1_a90yTqfayaBlGLjt" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvWmS1_a90yTqfayaBlGLjt" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAOfAAAAJDYyMDg3NGQ4LTNiMjgtNDZiOC1hYmI1LTgwM2YwZTkyZTg2Zg.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvew_ddy0ZqXtci-P73uknR" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTuvew_ddy0ZqXtci-P73uknR" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAVmAAAAJGM5NzE5YTEzLWI5NGQtNDJkYi04MzY1LTI3ODg2NDUwMWRlOA.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutXaDvWAqCCuTIq6LI-zNfQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutXaDvWAqCCuTIq6LI-zNfQ" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/067/30a/1804990.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutrBsXOQOPiGrEmyruvTQCx" data-li-url="/profile/mini-profile-with-connections?_ed=0_3tuhFZSemuUGDeRGOo76tDJp7E6ffhkExV8pdCWoTutrBsXOQOPiGrEmyruvTQCx" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAUsAAAAJGFiMWI2YWMxLTg3NGYtNDVjNS04YWNkLWI2MDkyMmIzMTRjYQ.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8M-Q8kubanhOw71T-Eve8Xa" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8M-Q8kubanhOw71T-Eve8Xa" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/132/13b/23b2e59.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYbr3s8dofJDoHUOY2S4RBo" data-li-url="/profile/mini-profile-with-connections?_ed=0_QtASVN4PeXgsS6CcxDfHwz5SCJgsoV2DTNZNxJmViBYbr3s8dofJDoHUOY2S4RBo" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdlAAAAJDAwYzU5ODk4LTNjMTctNDMwYS05ZDE3LTcwMzRkY2I1ZDllMg.jpg"></strong></span></li><li><span data-tracking="" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NiZLUcyi8aqZZseIUTgYkQ" data-li-url="/profile/mini-profile-with-connections?_ed=0_bWNDj98R3Qat_RfHw1YD3A6sBKqhO5wbjJciMVxdE8NiZLUcyi8aqZZseIUTgYkQ" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class="endorser small-thumbnail " width="30" height="30" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/181/134/0128446.jpg"></strong></span></li><li class="endorsers-action"><a class="see-all-endorsers" href="javascript:void(0)" role="button"><span class="loader"></span></a></li></ul>
- <div class="hr-line">
- </div>
- </div>
+ <span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="76">76</span></a>
+ <span class="endorse-item-name">
+ <span class="endorse-item-name-text">Product Management</span>
+ </span>
+ </span>
+ 
  </li>
  </ul>
  <h5>Jeff connaît aussi…</h5>
@@ -2007,6 +1520,7 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  </a>
  <span class="endorse-item-name">
  <span class="endorse-item-name-text">User Experience</span></span></span></div></li><li data-endorsed-item-name="Corporate Development" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="35">35</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Corporate Development</span></span></span></div></li><li data-endorsed-item-name="Non-profits" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="31">31</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Non-profits</span></span></span></div></li><li data-endorsed-item-name="Analytics" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="28">28</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Analytics</span></span></span></div></li><li data-endorsed-item-name="Mergers &amp; Acquisitions" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="28">28</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Mergers &amp; Acquisitions</span></span></span></div></li><li data-endorsed-item-name="Team Leadership" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="13">13</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Team Leadership</span></span></span></div></li><li data-endorsed-item-name="Thought Leadership" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="12">12</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Thought Leadership</span></span></span></div></li><li data-endorsed-item-name="Business Operations" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="10">10</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Business Operations</span></span></span></div></li><li data-endorsed-item-name="Leadership Development" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="10">10</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Leadership Development</span></span></span></div></li><li data-endorsed-item-name="Nonprofits" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="9">9</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Nonprofits</span></span></span></div></li><li data-endorsed-item-name="Mentoring" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="8">8</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Mentoring</span></span></span></div></li><li data-endorsed-item-name="Mobile Applications" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="6">6</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Mobile Applications</span></span></span></div></li><li data-endorsed-item-name="Motivation" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="5">5</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Motivation</span></span></span></div></li><li data-endorsed-item-name="Awesomeness" class="endorse-item has-endorsements " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="5">5</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Awesomeness</span></span></span></div></li><li data-endorsed-item-name="Education" class="endorse-item has-endorsements extra-skill " data-endorsement-id=""><div><span class="skill-pill"><a class="endorse-count" href="javascript:void(0)" role="button" title="Voir ceux qui ont recommandé les compétences"><span class="num-endorsements" data-count="3">3</span></a><span class="endorse-item-name"><span class="endorse-item-name-text">Education</span></span></span></div></li><li class="endorse-item" id="see-more-less-skill"><span class="see-more-less skill-pill" id="control_gen_11"><a href="javascript:void(0)"><span class="more-text">Voir 1 de plus</span><span class="more-arrow">&nbsp;</span><span class="less-arrow">&nbsp;</span><span class="less-text">Voir moins</span></a></span><script id="controlinit-dust-server-38381675-3" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-3","ToggleClass",{classname:'view-all-skills',on:'#profile-skills'})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-3";}</script></li></ul></div><script id="controlinit-dust-server-38381675-4" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-4","ProfileSectionSkills",{viewerId:'494448549',facePilePicsAjaxUrl:'\/profile\/profile-v2-picture-urls?ids=320388%2C4698054%2C45628093%2C42902664%2C247443%2C31824373%2C6569333%2C85816712%2C22304577%2C285882269%2C400030%2C2729136%2C29298342%2C4304088%2C113562072%2C157856%2C6008959%2C2611970%2C17348142%2C79348882%2C1733555%2C5351163%2C47354364%2C52661%2C1556651%2C10428%2C8553918%2C10810267%2C137667%2C393538%2C1669341%2C118085%2C27718%2C1200094%2C24631483%2C54331378%2C11180026%2C23578678%2C3158753%2C418001%2C494448549%2C1360971%2C5318542%2C86847565%2C3387473%2C6229948%2C184161%2C199526%2C26001642%2C184817006%2C6220083%2C7423135%2C197746%2C9685733%2C141089681%2C167160%2C13106360',facePileEndorserIds:[[393538,79348882,27718,85816712,17348142,199526,3387473,52661,6229948,1733555,42902664,7423135],[27718,197746,7423135,393538,79348882,23578678,1556651,9685733,113562072,199526,141089681,320388],[247443,393538,79348882,27718,85816712,2729136,52661,167160,1733555,10428,1200094,5351163],[247443,393538,27718,2729136,24631483,52661,1733555,5351163,47354364,184817006,1360971,22304577],[27718,1669341,199526,24631483,5351163,31824373,285882269,6008959,184817006,22304577,13106360,86847565],[2729136,1556651,1669341,199526,24631483,184161,10810267,4698054,6569333,167160,1733555,5351163],[247443,1556651,24631483,10810267,4698054,167160,5351163,6008959,29298342,184817006,22304577,157856],[27718,2729136,1556651,4698054,52661,10810267,5351163,22304577,6008959,184817006,3158753,45628093],[27718,393538,8553918,13106360,199526,4698054,31824373,137667,5351163,22304577,118085,4304088],[418001,5351163,184817006,13106360,54331378,3158753,5318542,2611970,6220083,26001642,400030,11180026]],dialogConfig:{dustDataUrl:'\/profile\/endorser-info-dialog?csrfToken=ajax%3A7784105811618584052',width:600,name:'skills-endorsers-dialog',className:'skills-endorser-dialog dialog-v2',type:'task-modeless',disableFocusOnClose:true,content:{title:'Auteurs des recommandations',dustTemplate:'tl/apps/profile/endorsements/endorser_Info_dialog'},dependencies:{jsFiles:'https://static.licdn.com/scds/concat/common/js?h=2u0oucd4aga6iz8worfbsb377&fc=2'}},endorsementData:{recipientId:'22330283',recipientType:'member'},distance:-1,isSelf:false,maxEndorsementCount:99,endorseURL:'\/profile\/endorse?_ed=0_2KjZg6oXb2V2F89fO9b1Jr9vVefjgmMy5Eg5IR_1O8f&csrfToken=ajax%3A7784105811618584052&goback=%2Enppvan_jeffweiner08',unendorseURL:'\/profile\/unendorse?_ed=0_2KjZg6oXb2V2F89fO9b1Jr9vVefjgmMy5Eg5IR_1O8f&csrfToken=ajax%3A7784105811618584052&goback=%2Enppvan_jeffweiner08',i18nMaxEndorsements:'+ de 99',i18nEndorseLimitExceeded:'Vous avez atteint la limite quotidienne de recommandations que vous pouvez donner.',i18nUnendorseLimitExceeded:'Vous avez atteint la limite quotidienne de recommandations que vous pouvez supprimer.',i18nGenericErrorMessage:'Nous avons rencontré un problème. Veuillez essayer plus tard.'})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-4";}</script></div></div></div></div>
+ <!--education -->
  <div id="background-education-container" class="background-section" data-li-template="education_section">
  <div id="background-education" class="background-education edit-default last">
  <h3>Formation</h3>
@@ -2014,37 +1528,64 @@ In December, 1994, began developing the initial business plan for Warner Bros. O
  <div id="education-18832484-view">
  <div class="education first">
  <a href="/edu/school?id=19329&amp;trk=prof-edu-school-logo" title="Plus de détails pour cette école">
- <h5 class="education-logo" aria-hidden="true"><span data-tracking="" class="new-miniprofile-container /edu/school-rich-mini-profile?id=19329&amp;entityId=19329&amp;entityType=SCHOOL" data-li-url="/edu/school-rich-mini-profile?id=19329&amp;entityId=19329&amp;entityType=SCHOOL" data-li-tl="tl/apps/plato/embed/home/school_mini_profile"><strong><img class="lazy-load" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdXAAAAJGE4NGMyZTNlLWVjNmQtNDZhMi1iMTllLTY3ZmIzZGE0NGU4Ng.png" data-li-src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdXAAAAJGE4NGMyZTNlLWVjNmQtNDZhMi1iMTllLTY3ZmIzZGE0NGU4Ng.png" alt="University of Pennsylvania - The Wharton School" width="60" height="60"></strong></span></h5></a><header><h4 class="summary fn org" dir="auto"><a href="/edu/school?id=19329&amp;trk=prof-edu-school-name" title="Plus de détails pour cette école">University of Pennsylvania - The Wharton School</a></h4><h5><span class="degree">Bachelor of Science, </span><span class="major"><a href="/edu/fos?id=100990&amp;trk=prof-edu-field_of_study" title="Découvrir ce domaine d’études">Economics</a></span></h5></header><span class="education-date"><time>1988</time><time> – juin 1992</time></span></div></div></div><script>if(LI.Dialog){LI.Dialog().submitEvent.subscribe(function(type,args){var educationID;if(args[1]=='removeEducationDialog'&&WebTracking&&WebTracking.trackUserAction){if(args[2]&&args[2].educationID){educationID=args[2].educationID;}WebTracking.trackUserAction('nprofile-edit-education-remove-submit',{educationID:educationID});}});}</script>
+ <h5 class="education-logo" aria-hidden="true">
+ <span data-tracking="" class="new-miniprofile-container /edu/school-rich-mini-profile?id=19329&amp;entityId=19329&amp;entityType=SCHOOL" data-li-url="/edu/school-rich-mini-profile?id=19329&amp;entityId=19329&amp;entityType=SCHOOL" data-li-tl="tl/apps/plato/embed/home/school_mini_profile">
+ <strong><img class="lazy-load" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdXAAAAJGE4NGMyZTNlLWVjNmQtNDZhMi1iMTllLTY3ZmIzZGE0NGU4Ng.png" data-li-src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdXAAAAJGE4NGMyZTNlLWVjNmQtNDZhMi1iMTllLTY3ZmIzZGE0NGU4Ng.png" alt="University of Pennsylvania - The Wharton School" width="60" height="60">
+ </strong>
+ </span>
+ </h5>
+ </a>
+ <header>
+ <h4 class="summary fn org" dir="auto">
+ <a id="EducationA"href="/edu/school?id=19329&amp;trk=prof-edu-school-name" title="Plus de détails pour cette école">{{education.a}}</a>
+ </h4>
+ <a href="#DialogEducationA">(Edit)</a>
+ <div id="DialogEducationA" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="educationA"/>
+		<button type="button" class="btn btn-primary" ng-click="FEducationA()">Save changes</button>
+	</div>
+</div>
+ <h5>
+ <span id="EducationSpan"class="degree">{{education.span}}</span>
+ <a href="#DialogEducationSpan">(Edit)</a>
+ <div id="DialogEducationSpan" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  ng-model="educationSpan"/>
+		<button type="button" class="btn btn-primary" ng-click="FEducationSpan()">Save changes</button>
+	</div>
+</div>
+
+ 
+ </h5>
+ </header>
+ <span id="EducationDate"class="education-date"><time>{{education.datetimefrom}}</time><time>{{education.datetimeto}}</time></span>
+ <a href="#DialogEducationDate">(Edit)</a>
+ <div id="DialogEducationDate" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<input id="nb2" type="text" name="number2"  placeholder="From" ng-model="educationDateFrom"/>
+		<input id="nb2" type="text" name="number2"  placeholder="To" ng-model="educationDateTo"/>
+		<button type="button" class="btn btn-primary" ng-click="FEducationDate()">Save changes</button>
+	</div>
+</div>
+
+ </div>
+ </div>
+ </div>
+ <script>if(LI.Dialog){LI.Dialog().submitEvent.subscribe(function(type,args){var educationID;if(args[1]=='removeEducationDialog'&&WebTracking&&WebTracking.trackUserAction){if(args[2]&&args[2].educationID){educationID=args[2].educationID;}WebTracking.trackUserAction('nprofile-edit-education-remove-submit',{educationID:educationID});}});}</script>
 </div>
 </div>
+<!--//education -->
 </div>
 <!-- skills -->
 
 </div>
 
 
-<script type="text/javascript">fs._server.fire("profile_v2_background",{event:"after",type:"html"});</script>
-<script type="text/javascript">fs._server.fire("profile_v2_endorsements",{event:"before",type:"html"});</script><div id="endorsements" class="profile-endorsements view-given view-more" data-viewee-id="22330283" data-default-count="5" data-subject-type="" data-total-references="" data-total-recommendations="23" data-authinfo="/profile/profile-v2-endorsements?id=22330283&amp;authType=name&amp;authToken=XTo9"><h2 id="recommendations">Recommandations</h2> 
-
-<!-- id is there to jump to module -->
-<ul class="endorsements-nav"><li class="nav-given"><a href="" class="nav-given-tab">Données (23)</a></li></ul><div class="recommendations-container edit-collapse-module"><div class="endorsements-container"><div class="endorsements-received" data-li-template="references"><ol></ol></div><!-- /endorsements-received --><div class="endorsements-given"><ol><li><div class="endorsement-full"><div class="endorsement-picture"><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_1Ufx2hj6gjTEq2TLsUuSZo" data-li-url="/profile/mini-profile-with-connections?_ed=0_1Ufx2hj6gjTEq2TLsUuSZo" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class=" " alt="Arvind Rajan" width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAARCAAAAJGE2YTQxMGE1LWFhOGItNDJmOS05YTBmLWIzMGM4YzlmODliMg.jpg"></strong></span></div><div class="endorsement-info"><hgroup><h5><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_1Ufx2hj6gjTEq2TLsUuSZo" data-li-url="/profile/mini-profile-with-connections?_ed=0_1Ufx2hj6gjTEq2TLsUuSZo" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><a href="https://www.linkedin.com/profile/view?id=AAEAAAAABOwBWIO7tPKKKid6XEbzFc3qlUOHIpM&amp;authType=name&amp;authToken=4bNR" dir="auto">Arvind Rajan</a></strong></span></h5><h6 dir="auto">Managing Director and VP, New Markets</h6></hgroup><blockquote class="endorsement-quote"><p class="description summary-field-show-more" dir="ltr" id="control_gen_12">Arvind is the consummate team player, willing to play whatever role makes sense in order for him to help the company. He was integral in establishing LinkedIn's initial HR practice, and was responsible for building our Asia Pacific operations from the ground up. He was also the company's lead on establishing LinkedIn's presence in China, where he was responsible for...<a href="#" title="Voir plus" class="toggle-show-more">plus</a></p><script type="text/javascript">LI.i18n.register('ShowMore-see-more','plus');LI.i18n.register('ShowMore-see-less','moins');LI.i18n.register('ShowMore-see-more-long','Voir plus');LI.i18n.register('ShowMore-see-less-long','Voir moins');</script><script id="controlinit-dust-server-38381675-5" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-5","ShowMore",{charCount:375,showMoreText:"plus",showLessText:"moins"})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-5";}</script></blockquote><span class="endorsement-date">23 septembre 2015, Jeff encadrait Arvind chez LinkedIn</span></div></div></li><li><div class="endorsement-full"><div class="endorsement-picture"><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_2x6vfp0YShbVYbazQ5hMJu" data-li-url="/profile/mini-profile-with-connections?_ed=0_2x6vfp0YShbVYbazQ5hMJu" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class=" " alt="Sara Clemens" width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/005/026/230/06db0ac.jpg"></strong></span></div><div class="endorsement-info"><hgroup><h5><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_2x6vfp0YShbVYbazQ5hMJu" data-li-url="/profile/mini-profile-with-connections?_ed=0_2x6vfp0YShbVYbazQ5hMJu" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><a href="https://www.linkedin.com/profile/view?id=AAEAAAA4P4cBKqyOBpoPf5DBKLH1BwctY_LMP24&amp;authType=name&amp;authToken=XjKm" dir="auto">Sara Clemens</a></strong></span></h5><h6 dir="auto">Vice President, Corporate Development</h6></hgroup><blockquote class="endorsement-quote"><p class="description summary-field-show-more" dir="ltr" id="control_gen_13">Sara is a sharp strategic thinker capable of adding value and insight to any discussion. She has a steep learning curve and the ability to gain fluency in new subjects quickly. Additionally, Sara's experience in large organizations enables her to navigate complex horizontal initiatives effectively.</p><script id="controlinit-dust-server-38381675-6" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-6","ShowMore",{charCount:375,showMoreText:"plus",showLessText:"moins"})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-6";}</script></blockquote><span class="endorsement-date">30 septembre 2013, Jeff encadrait Sara chez LinkedIn</span></div></div></li><li><div class="endorsement-full"><div class="endorsement-picture"><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_2E2cMmv58S7-W8qU3fDYS3" data-li-url="/profile/mini-profile-with-connections?_ed=0_2E2cMmv58S7-W8qU3fDYS3" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class=" " alt="Adam Nash" width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/000/108/1c0/0b45f46.jpg"></strong></span></div><div class="endorsement-info"><hgroup><h5><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_2E2cMmv58S7-W8qU3fDYS3" data-li-url="/profile/mini-profile-with-connections?_ed=0_2E2cMmv58S7-W8qU3fDYS3" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><a href="https://www.linkedin.com/profile/view?id=AAEAAAAAIqwBcE3o_f-ihMvUtTr6ALuigXjfDRY&amp;authType=name&amp;authToken=uNvy" dir="auto">Adam Nash</a></strong></span></h5><h6 dir="auto">Vice President, Product Management</h6></hgroup><blockquote class="endorsement-quote"><p class="description summary-field-show-more" dir="ltr" id="control_gen_14">Adam is a highly talented product strategist with strong product sensibility, clear vision, and unwavering conviction for the initiatives he believes in. He's also an extremely effective evangelist and spokesperson, and was one of LinkedIn's most vocal cultural champions. Adam's ability to think strategically at a high level, and yet be equally passionate about the day-to-...<a href="#" title="Voir plus" class="toggle-show-more">plus</a></p><script id="controlinit-dust-server-38381675-7" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-7","ShowMore",{charCount:375,showMoreText:"plus",showLessText:"moins"})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-7";}</script></blockquote><span class="endorsement-date">15 janvier 2012, Jeff encadrait indirectement Adam chez LinkedIn</span></div></div></li><li><div class="endorsement-full"><div class="endorsement-picture"><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3n8vkC-jQEcJBJXAa2juoU" data-li-url="/profile/mini-profile-with-connections?_ed=0_3n8vkC-jQEcJBJXAa2juoU" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class=" " alt="Russell Jurney" width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/005/038/373/205c0fd.jpg"></strong></span></div><div class="endorsement-info"><hgroup><h5><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_3n8vkC-jQEcJBJXAa2juoU" data-li-url="/profile/mini-profile-with-connections?_ed=0_3n8vkC-jQEcJBJXAa2juoU" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><a href="https://www.linkedin.com/profile/view?id=AAEAAABfD7wBL_mqdnpkjXiQvbPiFU8XaFL4O78&amp;authType=name&amp;authToken=FCT0" dir="auto">Russell Jurney</a></strong></span></h5><h6 dir="auto">Senior Data Scientist</h6></hgroup><blockquote class="endorsement-quote"><p class="description summary-field-show-more" dir="ltr" id="control_gen_15">In addition to being a highly creative and capable data scientist, Russell established new ways of developing, visualizing, and quickly iterating data driven products. He would later coin the term "prodineering" to describe his efforts in this regard. Russell also applied his unique perspective to improving productivity within the workplace, exemplified by his creation of...<a href="#" title="Voir plus" class="toggle-show-more">plus</a></p><script id="controlinit-dust-server-38381675-8" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-8","ShowMore",{charCount:375,showMoreText:"plus",showLessText:"moins"})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-8";}</script></blockquote><span class="endorsement-date">30 juillet 2011, Jeff encadrait indirectement Russell chez LinkedIn</span></div></div></li><li><div class="endorsement-full"><div class="endorsement-picture"><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_1k4L3ynmIv-Rvxy3D202gz" data-li-url="/profile/mini-profile-with-connections?_ed=0_1k4L3ynmIv-Rvxy3D202gz" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><img class=" " alt="Eric Baldeschwieler" width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/7/005/076/2e2/18b5e6c.jpg"></strong></span></div><div class="endorsement-info"><hgroup><h5><span data-tracking="recommendee" class="new-miniprofile-container /profile/mini-profile-with-connections?_ed=0_1k4L3ynmIv-Rvxy3D202gz" data-li-url="/profile/mini-profile-with-connections?_ed=0_1k4L3ynmIv-Rvxy3D202gz" data-li-tl="tl/shared/profile/mini_profile_shell"><strong><a href="https://www.linkedin.com/profile/view?id=AAEAAAAAcgYB_v1WeFk9aS-tUoufcP76KvcYgno&amp;authType=name&amp;authToken=Q9Yp" dir="auto">Eric Baldeschwieler</a></strong></span></h5><h6 dir="auto">Senior director software engineering, web search crawling &amp; indexing</h6></hgroup><blockquote class="endorsement-quote"><p class="description summary-field-show-more" dir="ltr" id="control_gen_16">Eric is a dedicated and skilled technologist with true vision when it comes to deploying massively scalable technologies. He was a key architect at Inktomi in the development of their search technology. Following Inktomi's acquisition by Yahoo, Eric was a respected leader on the Yahoo Search team for a number of years before leading the company's Hadoop efforts. In an era...<a href="#" title="Voir plus" class="toggle-show-more">plus</a></p><script id="controlinit-dust-server-38381675-9" type="text/javascript+initialized" class="li-control">LI.Controls.addControl("control-dust-server-38381675-9","ShowMore",{charCount:375,showMoreText:"plus",showLessText:"moins"})</script><script type="text/javascript">if(dust&&dust.jsControl){if(!dust.jsControl.flushControlIds){dust.jsControl.flushControlIds="";}else{dust.jsControl.flushControlIds+=",";}dust.jsControl.flushControlIds+="control-dust-server-38381675-9";}</script></blockquote><span class="endorsement-date">24 juillet 2011, Jeff encadrait indirectement Eric chez Yahoo!</span></div></div></li></ol></div><!-- /endorsements-given --></div><div class="view-more-bar"><a href="#"><span>Voir plus</span></a></div><div class="view-less-bar"><a href="#"><span>Voir moins</span></a></div></div> </div><script type="text/javascript">fs._server.fire("profile_v2_endorsements",{event:"after",type:"html"});</script>
-<script id="profile_v2_connections" type="fs/embed+m"></script><script type="text/javascript">fs._server.setCustomXHR("profile_v2_connections",{"renderControl":"custom","templateId":"profile_v2_connections","url":"https://www.linkedin.com/profile/mappers?x-a=profile_v2_groups%2Cprofile_v2_connections%2Cprofile_v2_follow&x-p=top_card%2Etc%3Atrue%2Ctop_card%2EprofileContactsIntegrationStatus%3A0%2Cprofile_v2_discovery%2Eoffset%3A0%2Cprofile_v2_summary_upsell%2EsummaryUpsell%3Atrue%2Cprofile_v2_discovery%2Erecords%3A12%2Cprofile_v2_right_fixed_discovery%2Eoffset%3A0%2Cprofile_v2_discovery%2Eoffset%3A0%2Cprofile_v2_browse_map%2EpageKey%3Anprofile_view_nonself%2Cprofile_v2_connections%2Edistance%3A-1%2Cprofile_v2_discovery%2Erecords%3A12%2Cprofile_v2_right_fixed_discovery%2Erecords%3A12&x-oa=bottomAliases&id=22330283&locale=fr_FR&snapshotID=&authToken=XTo9&authType=name&invAcpt=&promoId=&notContactable=&primaryAction=&isPublic=false&sfd=true"});</script>
-<div id="groups-container">
-<div id="groups" class="profile-groups " data-total-num-groups="13"><h2>Groupes</h2><ul class="groups-container edit-collapse-module"><li class=" rowfirst"><p class="groups-name"><a href="/groups?gid=1905643&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/1/000/022/254/2db8b88.png" width="100" height="50" alt="Friends of LinkedIn"></a><a href="/groups?gid=1905643&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Friends of LinkedIn</strong></a></p><p class="groups-stats">9&nbsp;059 membres</p><a class="groups-join" href="/groupRegistration?gid=1905643&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=""><p class="groups-name"><a href="/groups?gid=3807622&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/4/000/14e/02f/0c113e4.png" width="100" height="50" alt="No Labels USA"></a><a href="/groups?gid=3807622&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>No Labels USA</strong></a></p><p class="groups-stats">878 membres</p><a class="groups-join" href="/groupRegistration?gid=3807622&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=""><p class="groups-name"><a href="/groups?gid=6970848&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAALNAAAAJGZkMmU5ZGUxLTBhMTktNDFiNC04N2RmLTgyYmYzYTUwYzc2Yw.png" width="100" height="50" alt="A Force For Good"></a><a href="/groups?gid=6970848&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>A Force For Good</strong></a></p><p class="groups-stats">4&nbsp;220 membres</p><a class="groups-join" href="/groupRegistration?gid=6970848&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=""><p class="groups-name"><a href="/groups?gid=36033&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/1/000/000/136/295580c.png" width="100" height="50" alt="Malaria No More"></a><a href="/groups?gid=36033&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Malaria No More</strong></a></p><p class="groups-stats">1&nbsp;622 membres</p><a class="groups-join" href="/groupRegistration?gid=36033&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=" rowfirst"><p class="groups-name"><a href="/groups?gid=36635&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/2/000/000/250/03a0cea.gif" width="100" height="50" alt="Yahoo Alums"></a><a href="/groups?gid=36635&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Yahoo Alums</strong></a></p><p class="groups-stats">4&nbsp;999 membres</p><a class="groups-join" href="/groupRegistration?gid=36635&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=""><p class="groups-name"><a href="/groups?gid=3954986&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/2/000/0cf/0dc/01811db.png" width="100" height="50" alt="TEACH"></a><a href="/groups?gid=3954986&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>TEACH</strong></a></p><p class="groups-stats">4&nbsp;275 membres</p><a class="groups-join" href="/groupRegistration?gid=3954986&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class=""><p class="groups-name"><a href="/groups?gid=3843393&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAAiUAAAAJDQ3ZjYzMDYxLTI3ZmMtNDM0OC1hOTBmLWRlMmI1Y2ZjY2RmYQ.png" width="100" height="50" alt="Conscious Capitalism Movement"></a><a href="/groups?gid=3843393&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Conscious Capitalism Movement</strong></a></p><p class="groups-stats">5&nbsp;269 membres</p><a class="groups-join" href="/groupRegistration?gid=3843393&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups"><p class="groups-name"><a href="/groups?gid=6961494&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAANmAAAAJDI3NjI0YWMwLWYyNGYtNGNlNS04ZTAzLTBiNTE1YTU0YzhiYg.png" width="100" height="50" alt="Conscious Business Friends"></a><a href="/groups?gid=6961494&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Conscious Business Friends</strong></a></p><p class="groups-stats">8&nbsp;220 membres</p><a class="groups-join" href="/groupRegistration?gid=6961494&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups rowfirst"><p class="groups-name"><a href="/groups?gid=62162&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/2/005/026/3be/3995c92.png" width="100" height="50" alt="Yahoo Employees and Alumni Group"></a><a href="/groups?gid=62162&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Yahoo Employees and Alumni Group</strong></a></p><p class="groups-stats">15&nbsp;440 membres</p><a class="groups-join" href="/groupRegistration?gid=62162&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups"><p class="groups-name"><a href="/groups?gid=3893618&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/3/000/0b5/0b7/198d3d2.png" width="100" height="50" alt="Khan Academy Group"></a><a href="/groups?gid=3893618&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Khan Academy Group</strong></a></p><p class="groups-stats">2&nbsp;019 membres</p><a class="groups-join" href="/groupRegistration?gid=3893618&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups"><p class="groups-name"><a href="/groups?gid=6628332&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/5/005/044/1e4/352cc69.png" width="100" height="50" alt="Writing on LinkedIn"></a><a href="/groups?gid=6628332&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>Writing on LinkedIn</strong></a></p><p class="groups-stats">28&nbsp;537 membres</p><a class="groups-join" href="/groupRegistration?gid=6628332&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups"><p class="groups-name"><a href="/groups?gid=1785828&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://media.licdn.com/media/p/1/000/05f/05c/1dd5ff1.png" width="100" height="50" alt="IT Global"></a><a href="/groups?gid=1785828&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>IT Global</strong></a></p><p class="groups-stats">4&nbsp;997 membres</p><a class="groups-join" href="/groupRegistration?gid=1785828&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="hidden hidden-groups rowfirst"><p class="groups-name"><a href="/groups?gid=138801&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-logo"><img src="https://static.licdn.com/scds/common/u/img/icon/group/icon_group_100x50_v2.png" width="100" height="50" alt="TED: Ideas Worth Spreading - Unofficial"></a><a href="/groups?gid=138801&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-name" class="group-link"><strong>TED: Ideas Worth Spreading - Unofficial</strong></a></p><p class="groups-stats">579&nbsp;355 membres</p><a class="groups-join" href="/groupRegistration?gid=138801&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=prof-groups-membership-join-link">S’inscrire</a></li><li class="see-more"><a class="see-arrow" href=""><span></span></a><a class="see-action" href="javascript:void(0)">Voir 6 de plus</a></li><li class="see-less hidden"><a class="see-arrow" href=""><span></span></a><a class="see-action" href="javascript:void(0)">Voir moins</a></li></ul></div><script id="profile_v2_groups" type="fs/embed+m"></script><script type="text/javascript">fs.dupeXHR("profile_v2_groups","profile_v2_connections",{"renderControl":"custom","templateId":"profile_v2_groups"});</script>
-</div>
-<div id="following-container">
-<div class="profile-following"><h2>Abonnements</h2><div class="following-container edit-collapse-module"><div class="following-channels"><h3>Actualités</h3><ul id="follow-channel-list"><li><p class="following-name"><a href="/channels/leadership_and_management?trk=prof-following-chan-icon"><img alt="Leadership &amp; Management" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/005/04d/194/1ecd7a4.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/leadership_and_management?trk=prof-following-chan-icon" dir="auto">Leadership &amp; Management</a></p><p class="following-stats">18&nbsp;850&nbsp;243 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/200?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/200/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/big_ideas_and_innovation?trk=prof-following-chan-icon"><img alt="Big Ideas &amp; Innovation" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/2/005/04d/19a/03e7fea.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/big_ideas_and_innovation?trk=prof-following-chan-icon" dir="auto">Big Ideas &amp; Innovation</a></p><p class="following-stats">16&nbsp;295&nbsp;734 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/211?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/211/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/technology?trk=prof-following-chan-icon"><img alt="Technology" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/005/04d/198/31cb895.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/technology?trk=prof-following-chan-icon" dir="auto">Technology</a></p><p class="following-stats">14&nbsp;984&nbsp;814 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/230?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/230/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/entrepreneurship?trk=prof-following-chan-icon"><img alt="Entrepreneurship" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/2/000/204/16f/07fba9e.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/entrepreneurship?trk=prof-following-chan-icon" dir="auto">Entrepreneurship</a></p><p class="following-stats">12&nbsp;031&nbsp;467 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/214?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/214/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/social_media?trk=prof-following-chan-icon"><img alt="Social Media" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/01f/019/015991b.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/social_media?trk=prof-following-chan-icon" dir="auto">Social Media</a></p><p class="following-stats">11&nbsp;762&nbsp;587 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/202?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/202/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/the_economy?trk=prof-following-chan-icon"><img alt="Economy" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/005/04d/18b/2453268.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/the_economy?trk=prof-following-chan-icon" dir="auto">Economy</a></p><p class="following-stats">10&nbsp;788&nbsp;852 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/227?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/227/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li><p class="following-name"><a href="/channels/social_impact?trk=prof-following-chan-icon"><img alt="Social Impact" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/5/005/088/160/39efa6f.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/social_impact?trk=prof-following-chan-icon" dir="auto">Social Impact</a></p><p class="following-stats">3&nbsp;256&nbsp;738 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/10000300?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/10000300/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/channels/inspiration?trk=prof-following-chan-icon"><img alt="What Inspires Me" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/000/2b4/17f/1b41717.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/inspiration?trk=prof-following-chan-icon" dir="auto">What Inspires Me</a></p><p class="following-stats">3&nbsp;149&nbsp;643 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/10000311?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/10000311/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/channels/editor_choice?trk=prof-following-chan-icon"><img alt="Editor's Picks" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/068/0a4/2b2159d.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/editor_choice?trk=prof-following-chan-icon" dir="auto">Editor's Picks</a></p><p class="following-stats">2&nbsp;128&nbsp;703 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/10000285?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/10000285/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/channels/product_management?trk=prof-following-chan-icon"><img alt="Product Management" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/3/005/044/1bf/30c4380.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/product_management?trk=prof-following-chan-icon" dir="auto">Product Management</a></p><p class="following-stats">1&nbsp;383&nbsp;770 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/5834106997426888704?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/5834106997426888704/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/channels/video?trk=prof-following-chan-icon"><img alt="Top Videos" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAJsAAAAJDRmMjZlMzI5LWM4YTYtNGRkOC1iYTMxLTBiYzFlNTVkNDJkMg.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/video?trk=prof-following-chan-icon" dir="auto">Top Videos</a></p><p class="following-stats">139&nbsp;671 abonnés</p><div class="select-follow-action"><a class="following-action selected" href="/channels/api/follows/channels/5979652657906737152?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a><a class="following-active following-active-color" href="/channels/api/follows/channels/5979652657906737152/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/channels/pulse?trk=prof-following-chan-icon"><img alt="Pulse" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAYPAAAAJGYyYTBlYjdkLTc3ZGMtNGNkYi1iZGVlLTc1YzA2MjZjZTk5ZA.png" width="60" height="60"></a></p><p class="channel-name"><a href="/channels/pulse?trk=prof-following-chan-icon" dir="auto">Pulse</a></p><p class="following-stats">791&nbsp;784 abonnés</p><div class="select-follow-action"><a class="following-active following-active-color selected" href="/channels/api/follows/channels/6036913024072171520/delete?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a><a class="following-action" href="/channels/api/follows/channels/6036913024072171520?csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-edit-following-chan-follow-submit">Suivre</a></div></li><li class="see-more"><a class="see-arrow" href="#"><span></span></a><a class="see-action" href="#">Voir 5 de plus</a></li><li class="see-less hidden"><a class="see-arrow" href="#"><span></span></a><a class="see-action" href="#">Voir moins</a></li></ul></div><div class="following-companies collapsed-view" data-li-ajax-url="/profile/profile-v2-follow-companies?id=22330283&amp;count=-1"><h3>Entreprises</h3><ul><li class=" rowfirst"><p class="following-name"><a href="/company/teach-for-america?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAARgAAAAJGUxODk1ZGM4LWJmYmYtNDQxZS1iOGE2LTBkYzU4ZTE3MTg0MA.png" alt=""></span><strong dir="auto">Teach For America</strong></a></p><p class="following-field">Administration scolaire et universitaire</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=157314&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=157314&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/company/adweek?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/p/7/005/093/0bb/359726e.png" alt=""></span><strong dir="auto">Adweek</strong></a></p><p class="following-field">Édition</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=162309&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=162309&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/company/eichstaedt-&amp;-lervold-llp?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/p/5/005/083/0eb/110bc35.png" alt=""></span><strong dir="auto">Realize CPA, LLP (fka Eichstaedt &amp; Lervold, LLP)</strong></a></p><p class="following-field">Comptabilité</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=1463706&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=1463706&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/company/boys-&amp;-girls-clubs-of-the-peninsula?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/p/5/005/00c/1bf/134d5ca.png" alt=""></span><strong dir="auto">Boys &amp; Girls Clubs of the Peninsula</strong></a></p><p class="following-field">Gestion des associations et fondations</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=66930&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=66930&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=" rowfirst"><p class="following-name"><a href="/company/american-express-open?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/p/4/005/0a0/2ea/3008930.png" alt=""></span><strong dir="auto">American Express OPEN</strong></a></p><p class="following-field">Services financiers</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=2419120&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=2419120&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/company/linkedin-economic-graph?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAALYAAAAJGRhNzU1N2QxLTYzOTgtNGIwNC1iZGYyLTczYzk0MzA0NTE3NQ.png" alt=""></span><strong dir="auto">LinkedIn Economic Graph</strong></a></p><p class="following-field">Une page Vitrine</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=3632240&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=3632240&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/company/twitter?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAAbNAAAAJGI5OTRmZGI2LTVmNDEtNGIwOC1iMTg5LWRjYmE5MmQ2ZTk3Zg.png" alt=""></span><strong dir="auto">Twitter</strong></a></p><p class="following-field">Internet</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=96622&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=96622&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/company/nest-?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/p/5/005/074/287/26717b8.png" alt=""></span><strong dir="auto">Nest</strong></a></p><p class="following-field">Produits électroniques grand public</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=2374003&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=2374003&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups rowfirst"><p class="following-name"><a href="/company/pandora?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAAVHAAAAJDY4YjkyMDI5LWIyYzUtNGM1Zi05MmRhLTgwNzAzZDYwODE5Yg.png" alt=""></span><strong dir="auto">Pandora</strong></a></p><p class="following-field">Internet</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=26479&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=26479&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="hidden hidden-groups"><p class="following-name"><a href="/company/warner-bros--entertainment-group-of-companies?trk=prof-following-company-logo"><span class="companies-logo"><img src="https://media.licdn.com/media/AAEAAQAAAAAAAAWqAAAAJDhmYWJlM2ExLTUyOWMtNDgzNS1hZTllLTMxZmY4M2Q0ODYwYQ.png" alt=""></span><strong dir="auto">Warner Bros. Entertainment Group of Companies</strong></a></p><p class="following-field">Divertissements</p><div class="select-follow-action"><a class="following-action selected" href="/company/follow/submit?id=2470&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=start&amp;trk=profile-view-following-companies-follow-submit">Suivre</a><a class="following-active following-active-color" href="/company/follow/submit?id=2470&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;fl=stop&amp;trk=profile-view-following-companies-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class="see-more"><a class="see-arrow" href="#"><span></span></a><a class="see-action" href="#">Voir 72 de plus</a></li></ul></div><div class="following-schools"><h3>Écoles</h3><ul><li class=" rowfirst"><p class="following-name"><a href="/edu/school?id=19328&amp;trk=prof-following-school-logo"><span class="schools-logo"><img width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/1/005/008/0ce/235f468.png"></span><strong dir="auto">University of Pennsylvania</strong></a></p><p class="following-field" dir="auto">Région de Greater Philadelphie , États-Unis</p><div class="select-follow-action"><a class="following-action selected" href="/edu/school-follow?schoolId=19328&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-follow-submit">Suivre</a><a class="following-active following-active-color" href="/edu/school-unfollow?schoolId=19328&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/edu/school?id=19329&amp;trk=prof-following-school-logo"><span class="schools-logo"><img width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAdXAAAAJGE4NGMyZTNlLWVjNmQtNDZhMi1iMTllLTY3ZmIzZGE0NGU4Ng.png"></span><strong dir="auto">University of Pennsylvania - The Wharton School</strong></a></p><p class="following-field" dir="auto">Région de Greater Philadelphie , États-Unis</p><div class="select-follow-action"><a class="following-action selected" href="/edu/school-follow?schoolId=19329&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-follow-submit">Suivre</a><a class="following-active following-active-color" href="/edu/school-unfollow?schoolId=19329&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li><li class=""><p class="following-name"><a href="/edu/school?id=17926&amp;trk=prof-following-school-logo"><span class="schools-logo"><img width="60" height="60" src="https://media.licdn.com/mpr/mpr/shrink_100_100/AAEAAQAAAAAAAAPNAAAAJDViOGI4YWMxLTI0OWMtNDkwNy1hNWQ0LTlmNWU2ZjA1MmMyZQ.png"></span><strong dir="auto">Stanford University</strong></a></p><p class="following-field" dir="auto">Région de la baie de San Francisco , États-Unis</p><div class="select-follow-action"><a class="following-action selected" href="/edu/school-follow?schoolId=17926&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-follow-submit">Suivre</a><a class="following-active following-active-color" href="/edu/school-unfollow?schoolId=17926&amp;csrfToken=ajax%3A7784105811618584052&amp;goback=%2Enppvan_jeffweiner08&amp;trk=profile-view-following-schools-unfollow-submit"><span class="followingText">Suivi</span><span class="unfollowText">Ne plus suivre</span></a></div></li></ul></div><span class="loader" role="alert">Chargement…</span></div></div><script id="profile_v2_follow" type="fs/embed+m"></script><script type="text/javascript">fs.dupeXHR("profile_v2_follow","profile_v2_connections",{"renderControl":"custom","templateId":"profile_v2_follow"});</script>
-</div>
-</div>
-<div id="aux">
-<script type="text/javascript">fs._server.fire("profile_v2_locale",{event:"before",type:"html"});</script><script type="text/javascript">fs._server.fire("profile_v2_locale",{event:"after",type:"html"});</script>
-<script type="text/javascript">fs._server.fire("profile_v2_teamlink_v2",{event:"before",type:"html"});</script><script type="text/javascript">LI.IntrosDialogDependencies={jsFiles:'https:\/\/static.licdn.com\/scds\/concat\/common\/js?h=5yzpl4gi34d2ztlwxybir7g09-1klhext8ustb2dllq0s38vcwv&fc=2'};</script><script type="text/javascript">fs._server.fire("profile_v2_teamlink_v2",{event:"after",type:"html"});</script>
-
 
 </div>
-<script type="text/javascript">fs._server.fire("profile_v2_inmail_suggestions",{event:"before",type:"html"});</script><script type="text/javascript">fs._server.fire("profile_v2_inmail_suggestions",{event:"after",type:"html"});</script>
-</div>
-
-	
 </body>
 </html>
